@@ -1,0 +1,25 @@
+﻿@model CartCatalogViewModel
+@{
+    ViewData["Title"] = "Cart";
+}
+
+
+<div class="row">
+    @foreach (var product in Model.Items)
+    {
+        <div class="card col-md-4">
+            <img src="@product.Product.ImagePath" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">@product.Product.Title</h5>
+                <p class="card-text">@product.Product.Description</p>
+                <h6 class="card-text">@product.Product.Price.ToString() $</h6>
+                <a asp-action="Remove" asp-route-id="@product.Product.Id.ToString()" asp-controller="Cart" type="button" class="btn btn-secondary btn-lg">Remove</a>
+            </div>
+        </div>
+    }
+    
+</div>
+
+<div class="text-right">
+    <label asp-for="Sum" class="form-label">Sum is @Model.Sum$</label>
+</div>

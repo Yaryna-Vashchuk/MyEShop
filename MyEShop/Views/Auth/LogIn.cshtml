@@ -1,0 +1,37 @@
+﻿@model LogInViewModel
+
+@{
+    ViewBag.Title = "LogIn";
+    Layout = "_Layout";
+}
+
+<div class="mb-4">
+    <h2>@ViewBag.Title</h2>
+</div>
+
+<div class="d-flex aligns-items-center justify-content-center h-100">
+    <div class="w-50">
+        <form asp-action="LogIn" asp-controller="Auth" method="post">
+            <div class="mb-3">
+                <label asp-for="Email" class="form-label"></label>
+                <input asp-for="Email" class="form-control" />
+            </div>
+            
+            <div class="mb-3">
+                <label asp-for="Password" class="form-label"></label>
+                <div class="input-group" id="show_hide_password">
+                    <input asp-for="Password" class="form-control" type="password">
+                    <div class="input-group-addon">
+                        <a href=""><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="d-grid gap-2">
+                <button type="submit" class="btn btn-primary btn-lg">LogIn</button>
+                <a asp-action="Register" asp-controller="Auth" type="button" class="btn btn-secondary btn-lg">Register</a>
+            </div>
+        </form>
+    </div>
+</div>

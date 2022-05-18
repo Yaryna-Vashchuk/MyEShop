@@ -1,0 +1,51 @@
+﻿@model CatalogViewModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="row">
+    @foreach (var product in Model.Products)
+    {
+        <div class="card col-md-4">
+            <img src="@product.ImagePath" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">@product.Title</h5>
+                <p class="card-text">@product.Description</p>
+                <h6 class="card-text">@product.Price.ToString() $</h6>
+                <a asp-action="Details" asp-route-id="@product.Id.ToString()" asp-controller="Product" type="button" class="btn btn-primary btn-sm">Details</a>
+                <button onclick="AddToCart(`@product.Id.ToString()`)">Add to cart</button>
+            </div>
+        </div>
+    }
+
+</div>
+
+@section Scripts
+{
+    <script>
+
+        function AddToCart(productId) {
+            console.log(productId, "Hi bitch")
+            $.ajax({
+                url: '/Cart/AddItem/' + productId,
+                type: 'POST',
+                body: productId,
+                error: function (err) {
+                    alert(err.statusText);
+                }
+            });
+        };
+
+            //force - cache, only -if-cached
+            //credentials: 'same-origin', // include, *same-origin, omit
+            //        headers: {
+            //    'Content-Type': 'application/json'
+            //    // 'Content-Type': 'application/x-www-form-urlencoded',
+            //},
+            //redirect: 'follow', // manual, *follow, error
+            //    referrerPolicy: 'no-referrer', // no-referrer, *client
+            //        bo
+            //tpk - smvm - fex
+       
+    </script>
+}

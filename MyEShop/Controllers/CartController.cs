@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using MyEShop.Data;
 using MyEShop.Entities;
 using MyEShop.Models;
@@ -19,7 +20,9 @@ namespace MyEShop.Controllers
         [HttpGet]
         public IActionResult Cart()
         {
-            return View();
+            var products = _context.Carts.Include(x => x.Product).ToList();
+            CartCatalogViewModel cart = new CartCatalogViewModel { Items = products };
+            return View(cart);
         }
         [HttpPost]
         public IActionResult AddItem(string id)

@@ -13,7 +13,7 @@
                 <h5 class="card-title">@product.Product.Title</h5>
                 <p class="card-text">@product.Product.Description</p>
                 <h6 class="card-text">@product.Product.Price.ToString() $</h6>
-                <a asp-action="Remove" asp-route-id="@product.Product.Id.ToString()" asp-controller="Cart" type="button" class="btn btn-secondary btn-lg">Remove</a>
+                <a asp-action="Delete" asp-route-id="@product.Product.Id.ToString()" asp-controller="Cart" type="button" class="btn btn-secondary btn-lg">Delete</a>
             </div>
         </div>
     }

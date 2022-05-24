@@ -13,7 +13,10 @@
                 <p class="card-text">@product.Description</p>
                 <h6 class="card-text">@product.Price.ToString() $</h6>
                 <a asp-action="Details" asp-route-id="@product.Id.ToString()" asp-controller="Product" type="button" class="btn btn-primary btn-sm">Details</a>
-                <button onclick="AddToCart(`@product.Id.ToString()`)">Add to cart</button>
+                @if (Context.User.Identity.IsAuthenticated)
+                 {
+                    <button onclick="AddToCart(`@product.Id.ToString()`)">Add to cart</button>
+                 }
             </div>
         </div>
     }
@@ -25,7 +28,6 @@
     <script>
 
         function AddToCart(productId) {
-            console.log(productId, "Hi it's js")
             $.ajax({
                 url: '/Cart/AddItem/' + productId,
                 type: 'POST',
@@ -36,16 +38,6 @@
             });
         };
 
-            //force - cache, only -if-cached
-            //credentials: 'same-origin', // include, *same-origin, omit
-            //        headers: {
-            //    'Content-Type': 'application/json'
-            //    // 'Content-Type': 'application/x-www-form-urlencoded',
-            //},
-            //redirect: 'follow', // manual, *follow, error
-            //    referrerPolicy: 'no-referrer', // no-referrer, *client
-            //        bo
-            //tpk - smvm - fex
        
     </script>
 }

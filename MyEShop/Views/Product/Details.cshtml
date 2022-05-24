@@ -16,10 +16,13 @@
         <h5 class="card-title">@Model.Title</h5>
         <p class="card-text">@Model.Description</p>
         <h6 class="card-text">@Model.Price.ToString() $</h6>
-        <button type="submit" class="btn btn-primary btn-lg">Add To Cart</button>
-        @if(Context.User.IsInRole("Admin"))
+        @if (Context.User.Identity.IsAuthenticated)
         {
-        <a asp-action="Edit" asp-route-id="@Model.Id.ToString()" asp-controller="Product" type="button" class="btn btn-primary btn-lg">Edit</a>
+            <button onclick="AddToCart(`@Model.Id.ToString()`)">Add to cart</button>
+        }
+        @if (Context.User.IsInRole("Admin"))
+        {
+            <a asp-action="Edit" asp-route-id="@Model.Id.ToString()" asp-controller="Product" type="button" class="btn btn-primary btn-lg">Edit</a>
         }
     </div>
 </div>
